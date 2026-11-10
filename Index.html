@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mariposa Azul</title>
+  <style>
+    body {
+      background-color: #0b0d13;
+      color: #00d2ff;
+      font-family: 'Courier New', Courier, monospace;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      overflow: hidden;
+      text-shadow: 0 0 10px #00d2ff, 0 0 20px #0077ff;
+    }
+
+    #canvas-container {
+      position: relative;
+      width: 100%;
+      max-width: 600px;
+      text-align: center;
+    }
+
+    pre {
+      font-size: 11px;
+      line-height: 1.1;
+      font-weight: bold;
+      white-space: pre;
+      margin: 0;
+      transition: transform 0.2s ease-in-out;
+    }
+
+    /* Ajuste para pantallas de celulares pequeños */
+    @media (max-width: 480px) {
+      pre {
+        font-size: 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="canvas-container">
+    <pre id="butterfly"></pre>
+  </div>
+
+  <script>
+    // Fotograma 1: Alas completamente abiertas con los 4 círculos 'O'
+    const frame1 = [
+      "                  .-.                  ",
+      "                 (   )                 ",
+      "                /     \\                ",
+      "   .-----------'       '-----------.   ",
+      "  /   .------.           .------.   \\  ",
+      " /   /        \\         /        \\   \\ ",
+      "|   |    (O)   |       |   (O)    |   |",
+      "|   |          |       |          |   |",
+      " \\   \\        /         \\        /   / ",
+      "  '--'-------'--.       .--'-------'--'  ",
+      "                 |     |                 ",
+      "  .--------------'     '--------------.  ",
+      " /   .------.           .------.   \\ ",
+      "|   /        \\         /        \\   |",
+      "|  |     (O)  |       |   (O)    |  |",
+      "|   \\        /         \\        /   |",
+      " \\   '------'           '------'   / ",
+      "  '--------------------------------'  ",
+      "                 \\     /                 ",
+      "                  '---'                  "
+    ].join("\n");
+
+    // Fotograma 2: Alas un poco contraídas (aleteo)
+    const frame2 = [
+      "                  .-.                  ",
+      "                 (   )                 ",
+      "                /     \\                ",
+      "     .---------'       '---------.     ",
+      "    /   .----.           .----.   \\    ",
+      "   /   /      \\         /      \\   \\   ",
+      "  |   |   (O)  |       |  (O)   |   |  ",
+      "  |   |        |       |        |   |  ",
+      "   \\   \\      /         \\      /   /   ",
+      "    '--'-----'--.       .--'-----'--'    ",
+      "                 |     |                 ",
+      "    .------------'     '------------.    ",
+      "   /   .----.           .----.   \\   ",
+      "  |   /      \\         /      \\   |  ",
+      "  |  |    (O) |       |  (O)   |  |  ",
+      "  |   \\      /         \\      /   |  ",
+      "   \\   '----'           '----'   /   ",
+      "    '----------------------------'    ",
+      "                 \\     /                 ",
+      "                  '---'                  "
+    ].join("\n");
+
+    const butterflyElement = document.getElementById("butterfly");
+    const frames = [frame1, frame2];
+    let step = 0;
+
+    // Animación de aleteo y vuelo flotante
+    setInterval(() => {
+      // Alternar fotogramas
+      butterflyElement.textContent = frames[step % 2];
+
+      // Ondulación de vuelo (sube y baja suavemente)
+      const translateY = Math.sin(step * 0.3) * 15;
+      const rotate = Math.sin(step * 0.15) * 4;
+      butterflyElement.style.transform = `translateY(${translateY}px) rotate(${rotate}deg)`;
+
+      step++;
+    }, 180);
+  </script>
+</body>
+</html>
